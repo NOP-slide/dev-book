@@ -15,7 +15,7 @@ Alert.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    alerts: state.alert
+    alerts: state.alert  // In reducers/alert.js, export default function is unnamed, so state name (initialState = []) defaults to filename
 });
 
 export default connect(mapStateToProps)(Alert)
