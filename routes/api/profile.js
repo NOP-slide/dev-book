@@ -68,7 +68,7 @@ router.post('/', [auth, [
     if (githubusername) profileFields.githubusername = githubusername;
     if (skills) {
         // Split the skills input, a comma separated list, into an array with no spaces
-        profileFields.skills = skills.split(',').map(skill => skill.trim());
+        profileFields.skills = skills.toString().split(',').map(skill => skill.trim());
     }
 
     // Build social media object

@@ -8,6 +8,10 @@ import Register from './components/auth/Register';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
+import CreateProfile from './components/profile-forms/CreateProfile';
+import EditProfile from './components/profile-forms/EditProfile';
+import AddExperience from './components/profile-forms/AddExperience';
+import AddEducation from './components/profile-forms/AddEducation';
 
 import './App.css';
 
@@ -50,7 +54,32 @@ const App = () => {
             )} />
             <PrivateRoute path='/dashboard' component={() => (
               <div className="container">
+                <Alert />
                 <Dashboard />
+              </div>
+            )} />
+            <PrivateRoute path='/create-profile' component={() => (
+              <div className="container">
+                <Alert />
+                <CreateProfile />
+              </div>
+            )} />
+            <PrivateRoute path='/edit-profile' component={() => (
+              <div className="container">
+                <Alert />
+                <EditProfile />
+              </div>
+            )} />
+            <PrivateRoute path='/add-experience' component={() => (
+              <div className="container">
+                <Alert />
+                <AddExperience />
+              </div>
+            )} />
+            <PrivateRoute path='/add-education' component={() => (
+              <div className="container">
+                <Alert />
+                <AddEducation />
               </div>
             )} />
           </Switch>
