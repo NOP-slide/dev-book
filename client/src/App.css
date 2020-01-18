@@ -21,6 +21,10 @@ body {
   color: #333;
 }
 
+.posttext {
+  white-space: pre-wrap;
+}
+
 a {
   color: var(--primary-color);
   text-decoration: none;
@@ -288,6 +292,8 @@ button {
   color: #0077b5;
 }
 
+
+
 .table th,
 .table td {
   padding: 1rem;
@@ -520,10 +526,6 @@ button {
   .navbar ul {
     text-align: center;
     justify-content: center;
-  }
-
-  .navbar h1 {
-    margin-bottom: 1rem;
   }
 
   .navbar .welcome {

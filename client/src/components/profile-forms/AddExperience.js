@@ -33,8 +33,8 @@ const AddExperience = ( {addExperience, history} ) => {
         <Fragment>
             <h1 className="large text-primary">Add Experience</h1>
             <p className="lead">
-                <i className="fas fa-code-branch"></i> Add any developer/programming
-                positions that you have had in the past
+                <i className="fas fa-code-branch"></i> Add any programming/development
+                positions you've held
             </p>
             <small>* = required field</small>
             <form className="form" onSubmit={e => {

@@ -23,7 +23,7 @@ const EditProfile = ( {profile: {profile, loading}, createProfile, getCurrentPro
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
     useEffect(() => {
-        getCurrentProfile();
+        getCurrentProfile(false);
 
         setFormData({
             company: loading || !profile.company ? '' : profile.company,
@@ -68,7 +68,7 @@ const EditProfile = ( {profile: {profile, loading}, createProfile, getCurrentPro
         <Fragment>
             <h1 className="large text-primary">Edit Your Profile</h1>
             <p className="lead">
-                <i className="fas fa-user"></i> Don't go changing, trying to please me -- but if you insist...
+                <i className="fas fa-user"></i> Keep us updated with your latest information
             </p>
             <small>* = required field</small>
             <form className="form" onSubmit={e => onSubmit(e)}>
