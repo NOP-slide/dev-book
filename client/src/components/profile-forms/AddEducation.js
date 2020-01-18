@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { addEducation } from '../../actions/profile';
 
-const AddEducation = ( {addEducation, history} ) => {
+const AddEducation = ({ addEducation, history }) => {
     const [formData, setFormData] = useState({
         school: '',
         degree: '',
@@ -31,49 +31,56 @@ const AddEducation = ( {addEducation, history} ) => {
 
     return (
         <Fragment>
-            <h1 className="large text-primary">Add Education</h1>
-            <p className="lead">
-                <i className="fas fa-code-branch"></i> Add any school or bootcamp you've attended
-            </p>
-            <small>* = required field</small>
-            <form className="form" onSubmit={e => {
-                e.preventDefault();
-                addEducation(formData, history);
-            }}>
-                <div className="form-group">
-                    <input type="text" placeholder="* School/Bootcamp" name="school" required value={school} onChange={e => onChange(e)} />
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8 m-auto">
+                        <h1 className="display-4 text-center">Add Education</h1>
+                        <p className="lead text-center">
+                            <i className="fas fa-code-branch"></i> Add any school or bootcamp you've attended
+                        </p>
+                        <small className="d-block pb-3">* = required field</small>
+                        <form onSubmit={e => {
+                            e.preventDefault();
+                            addEducation(formData, history);
+                        }}>
+                            <div className="form-group">
+                                <input className="form-control" type="text" placeholder="* School/Bootcamp" name="school" required value={school} onChange={e => onChange(e)} />
+                            </div>
+                            <div className="form-group">
+                                <input className="form-control" type="text" placeholder="* Degree/Certificate" name="degree" required value={degree} onChange={e => onChange(e)} />
+                            </div>
+                            <div className="form-group">
+                                <input className="form-control" type="text" placeholder="* Field of Study" name="fieldofstudy" required value={fieldofstudy} onChange={e => onChange(e)} />
+                            </div>
+                            <div className="form-group">
+                                <h6>* From Date</h6>
+                                <input className="form-control" type="date" name="from" value={from} onChange={e => onChange(e)} required />
+                            </div>
+                            <div className="form-check">
+                                <p><input className="form-check-input" type="checkbox" name="current" checked={current} value={current} onChange={e => {
+                                    setFormData({ ...formData, current: !current });
+                                    toggleDisabled(!toDateDisabled);
+                                }} />{' '}Current</p>
+                            </div>
+                            <div className="form-group">
+                                <h6>To Date</h6>
+                                <input className="form-control" type="date" name="to" value={to} onChange={e => onChange(e)} disabled={toDateDisabled ? 'disabled' : ''} />
+                            </div>
+                            <div className="form-group">
+                                <textarea
+                                    className="form-control"
+                                    name="description"
+                                    cols="30"
+                                    rows="5"
+                                    placeholder="Program Description"
+                                    value={description} onChange={e => onChange(e)} ></textarea>
+                            </div>
+                            <input type="submit" className="form-control btn btn-info btn-block mt-4" />
+                            <Link className="btn btn-block btn-light mb-2" to="/dashboard">Go Back</Link>
+                        </form>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <input type="text" placeholder="* Degree/Certificate" name="degree" required value={degree} onChange={e => onChange(e)} />
-                </div>
-                <div className="form-group">
-                    <input type="text" placeholder="* Field of Study" name="fieldofstudy" required value={fieldofstudy} onChange={e => onChange(e)} />
-                </div>
-                <div className="form-group">
-                    <h4>* From Date</h4>
-                    <input type="date" name="from" value={from} onChange={e => onChange(e)} required />
-                </div>
-                <div className="form-group">
-                    <p><input type="checkbox" name="current" checked={current} value={current} onChange={e => {
-                        setFormData({...formData, current: !current});
-                        toggleDisabled(!toDateDisabled);
-                    }} />{' '}Current</p>
-                </div>
-                <div className="form-group">
-                    <h4>To Date</h4>
-                    <input type="date" name="to" value={to} onChange={e => onChange(e)} disabled={toDateDisabled ? 'disabled' : ''} />
-                </div>
-                <div className="form-group">
-                    <textarea
-                        name="description"
-                        cols="30"
-                        rows="5"
-                        placeholder="Program Description"
-                        value={description} onChange={e => onChange(e)} ></textarea>
-                </div>
-                <input type="submit" className="btn btn-primary my-1" />
-                <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
-            </form>
+            </div>
         </Fragment>
     )
 }

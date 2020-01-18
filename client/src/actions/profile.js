@@ -14,11 +14,11 @@ import {
 
 // Get current user's profile
 export const getCurrentProfile = (prep = true) => async dispatch => {
-    // if (prep) {
-    //     dispatch({
-    //         type: PREPARE_GET_PROFILE
-    //     });
-    // }
+    if (prep) {
+        dispatch({
+            type: PREPARE_GET_PROFILE
+        });
+    }
 
     try {
         const res = await axios.get('/api/profile/me');

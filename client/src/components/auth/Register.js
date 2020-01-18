@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {Link, Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {setAlert} from '../../actions/alert';
-import {register} from '../../actions/auth';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 // Pull setAlert from props
-const Register = ({setAlert, register, isAuthenticated}) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -23,9 +23,9 @@ const Register = ({setAlert, register, isAuthenticated}) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (password !== password2) {
-            setAlert("Passwords don't match", "danger");
+            setAlert("Passwords don't match", "danger", 4000);
         } else {
-            register({name, email, password});
+            register({ name, email, password });
         }
     }
 
@@ -35,39 +35,46 @@ const Register = ({setAlert, register, isAuthenticated}) => {
 
     return (
         <div>
-            <h1 className="large text-primary">Sign Up</h1>
-            <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
-            <form className="form" onSubmit={onSubmit}>
-                <div className="form-group">
-                    <input type="text" placeholder="Name" name="name" value={name} onChange={onChange} required />
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8 m-auto">
+                        <h1 className="display-4 text-center">Sign Up</h1>
+                        <p className="lead text-center"><i className="fas fa-user"></i> Create Your Account</p>
+                        <form onSubmit={onSubmit}>
+                            <div className="form-group">
+                                <input className="form-control" type="text" placeholder="Name" name="name" value={name} onChange={onChange} required />
+                            </div>
+                            <div className="form-group">
+                                <input className="form-control" type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} required />
+                                <small className="form-text text-muted">This site uses Gravatar. If you'd like to have a profile image, use a Gravatar email</small>
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    className="form-control"
+                                    type="password"
+                                    placeholder="Password"
+                                    name="password"
+                                    minLength="6"
+                                    value={password} onChange={onChange}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    className="form-control"
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                    name="password2"
+                                    minLength="6"
+                                    value={password2} onChange={onChange}
+                                />
+                            </div>
+                            <input type="submit" className="btn btn-info btn-block mt-4" value="Register" />
+                        </form>
+                        <br />
+                        <h6>Already have an account? <Link to="/login">Sign In</Link></h6>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <input type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} required />
-                    <small className="form-text">This site uses Gravatar. If you'd like to have a profile image, use a Gravatar email</small>
-                </div>
-                <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        minLength="6"
-                        value={password} onChange={onChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        name="password2"
-                        minLength="6"
-                        value={password2} onChange={onChange}
-                    />
-                </div>
-                <input type="submit" className="btn btn-primary" value="Register" />
-            </form>
-            <p className="my-1">
-                Already have an account? <Link to="/login">Sign In</Link>
-            </p>
+            </div>
         </div>
     )
 }

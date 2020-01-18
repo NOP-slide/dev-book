@@ -5,8 +5,8 @@ import Moment from 'react-moment';
 
 const ProfileEducation = ({education: {school, degree, fieldofstudy, current, to, from, description}}) => {
     return (
-        <div>
-            <h3 className="text-dark">{school}</h3>
+        <li className="list-group-item">
+            <h3>{school}</h3>
             <p>
                 <Moment format="YYYY/MM/DD">{from}</Moment> - {!to ? ' Now' : <Moment format="YYYY/MM/DD">{to}</Moment>}
             </p>
@@ -16,10 +16,10 @@ const ProfileEducation = ({education: {school, degree, fieldofstudy, current, to
             <p>
                 <strong>Field of study: </strong> {fieldofstudy}
             </p>
-            <p>
-                <strong>Description: </strong> {description ? description : <em>None provided</em>}
+            <p className="posttext">
+                <strong>Description: </strong>{description ? description : <em>None provided</em>}
             </p>
-        </div>
+        </li>
     )
 }
 

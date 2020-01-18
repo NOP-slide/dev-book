@@ -7,27 +7,29 @@ import { deleteComment } from '../../actions/post';
 
 const CommentItem = ({ deleteComment, postid, comment: { _id, text, name, avatar, user, date }, auth }) => {
     return (
-        <div className="post bg-white p-1 my-1">
-            <div>
-                <Link to={`/profile/${user}`}>
-                    <img
-                        className="round-img"
-                        src={avatar}
-                        alt="avatar"
-                    />
-                    <h4>{name}</h4>
-                </Link>
-            </div>
-            <div>
-                <p className="my-1 posttext">{text}</p>
-                <p className="post-date">
-                    Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
-                </p>
-                {!auth.loading && user === auth.user._id && (
-                    <button onClick={e => deleteComment(postid, _id)} type="button" className="btn btn-danger">
-                        <i className="fas fa-times"></i>
-                    </button>
-                )}
+        <div className="card card-body mb-3">
+            <div className="row">
+                <div className="col-md-2">
+                    <Link to={`/profile/${user}`}>
+                        <img
+                            className="rounded-circle d-none d-md-block"
+                            src={avatar}
+                            alt="avatar"
+                        />
+                        <h5 className="text-center text-info">{name}</h5>
+                    </Link>
+                </div>
+                <div className="col-md-10">
+                    <p className="posttext">{text}</p>
+                    <p>
+                        <small>Posted on <Moment format="YYYY/MM/DD">{date}</Moment></small>
+                    </p>
+                    {!auth.loading && user === auth.user._id && (
+                        <button onClick={e => deleteComment(postid, _id)} type="button" className="btn btn-danger mr-1">
+                            <i className="fas fa-times"></i>
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     )

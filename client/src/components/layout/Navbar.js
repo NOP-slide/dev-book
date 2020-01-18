@@ -4,31 +4,59 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
     const authLinks = (
-        <ul>
-            <li><Link to="/profiles">Developers</Link></li>
-            <li><Link to="/posts">Posts</Link></li>
-            <li><Link to="/dashboard"><i className="fas fa-user"></i>{' '}<span className="hide-sm">Dashboard</span></Link></li>
-            <li><a onClick={logout} href="#!">
-                <i className="fas fa-sign-out-alt"></i>{' '}Log Out
+        <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+                <Link className="nav-link" to="/posts">Posts</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/dashboard">Dashboard</Link>
+            </li>
+            <li className="nav-item"><a className="nav-link" onClick={logout} href="#!">
+                {user !== null && (
+                    <img
+                        className="rounded-circle"
+                        src={user.avatar}
+                        alt={user.name}
+                        style={{ width: '25px', marginRight: '5px' }}
+                        title="You must have a Gravatar connected to your email to display an image"
+                    ></img>
+                )}{' '}Log Out
             </a></li>
         </ul>
     );
     const guestLinks = (
-        <ul>
-            <li><Link to="/profiles">Developers</Link></li>
-            <li><Link to="/register">Register</Link></li>
-            <li><Link to="/login">Log in</Link></li>
+        <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+                <Link className="nav-link" to="/register">Register</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/login">Log in</Link>
+            </li>
         </ul>
     );
 
     return (
-        <nav className="navbar bg-dark">
-            <h1>
-                <Link to="/"><i className="fas fa-code"></i> DevBook</Link>
-            </h1>
-            {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+            <Link className="navbar-brand" to="/"><i className="fas fa-code"></i> DevBook</Link>
+            <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#mobile-nav"
+            >
+                <span className="navbar-toggler-icon" />
+            </button>
+
+            <div className="collapse navbar-collapse" id="mobile-nav">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/profiles">Developers</Link>
+                    </li>
+                </ul>
+                {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
+            </div>
         </nav>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { getGithubRepos } from '../../actions/profile';
@@ -8,38 +8,39 @@ const ProfileGithub = ({ username, getGithubRepos, repos, error }) => {
         getGithubRepos(username);
         // eslint-disable-next-line
     }, [])
-    
+
     return (
-        <div className="profile-github">
-            <h2 className="text-primary my-1">GitHub Repos</h2>
+        <Fragment>
+            <hr />
+            <h2 className="text-info mb-4">Latest GitHub Repos</h2>
             {repos.length === 0 && error.msg === "Not Found" ? <h4>No repos found</h4> : (
                 repos.map(repo => (
-                    <div key={repo.id} className="repo bg-white p-1 my-1">
-                        <div>
-                            <h4>
-                                <a href={repo.html_url} target='_blank' rel='noopener noreferrer'>
-                                    {repo.name}
-                                </a>
-                            </h4>
-                            <p>{repo.description}</p>
-                        </div>
-                        <div>
-                            <ul>
-                                <li className="badge badge-primary">
+                    <div key={repo.id} className="card card-body mb-2">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <h4>
+                                    <a className="text-info" href={repo.html_url} target='_blank' rel='noopener noreferrer'>
+                                        {repo.name}
+                                    </a>
+                                </h4>
+                                <p>{repo.description}</p>
+                            </div>
+                            <div className="col-md-6">
+                                <span className="badge badge-info mr-1">
                                     Stars: {repo.stargazers_count}
-                                </li>
-                                <li className="badge badge-dark">
+                                </span>
+                                <span className="badge badge-secondary mr-1">
                                     Watchers: {repo.watchers_count}
-                                </li>
-                                <li className="badge badge-light">
+                                </span>
+                                <span className="badge badge-success">
                                     Forks: {repo.forks_count}
-                                </li>
-                            </ul>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 ))
             )}
-        </div>
+        </Fragment>
     )
 }
 

@@ -27,26 +27,32 @@ const Login = ( {login, isAuthenticated} ) => {
 
     return (
         <div>
-            <h1 className="large text-primary">Sign In</h1>
-            <p className="lead"><i className="fas fa-user"></i> Sign In To Your Account</p>
-            <form className="form" onSubmit={onSubmit}>
-                <div className="form-group">
-                    <input type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} required />
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8 m-auto">
+                        <h1 className="display-4 text-center">Sign In</h1>
+                        <p className="lead text-center"><i className="fas fa-user"></i> Sign In To Your Account</p>
+                        <form onSubmit={onSubmit}>
+                            <div className="form-group">
+                                <input className="form-control" type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} required />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    className="form-control"
+                                    type="password"
+                                    placeholder="Password"
+                                    name="password"
+                                    minLength="6"
+                                    value={password} onChange={onChange}
+                                />
+                            </div>
+                            <input type="submit" className="btn btn-info btn-block mt-4" value="Log In" />
+                        </form>
+                        <br />
+                        <h6>Don't have an account yet? <Link to="/register">Sign Up</Link></h6>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        minLength="6"
-                        value={password} onChange={onChange}
-                    />
-                </div>
-                <input type="submit" className="btn btn-primary" value="Log In" />
-            </form>
-            <p className="my-1">
-                Don't have an account yet? <Link to="/register">Sign Up</Link>
-            </p>
+            </div>
         </div>
     )
 }

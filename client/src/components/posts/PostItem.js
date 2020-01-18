@@ -8,44 +8,49 @@ import { addLike, removeLike, deletePost } from '../../actions/post';
 const PostItem = ({ addLike, removeLike, deletePost, auth, post: { _id, text, name, avatar, user, likes, comments, date }, showActions }) => {
 
     return (
-        <div className="post bg-white p-1 my-1">
-            <div>
-                <Link to={`/profile/${user}`} >
-                    <img
-                        className="round-img"
-                        src={avatar}
-                        alt="avatar"
-                    />
-                    <h4>{name}</h4>
-                </Link>
-            </div>
-            <div>
-                <p className="my-1 posttext">{text}</p>
-                <p className="post-date">
-                    Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
-                </p>
-
-                {showActions && <Fragment>
-                    <button onClick={e => addLike(_id)} type="button" className="btn btn-light">
-                        <i className="fas fa-thumbs-up"></i>
-                        {likes.length > 0 && (
-                            <span> {likes.length}</span>
-                        )}
-                    </button>
-                    <button onClick={e => removeLike(_id)} type="button" className="btn btn-light">
-                        <i className="fas fa-thumbs-down"></i>
-                    </button>
-                    <Link to={`/posts/${_id}`} className="btn btn-primary">
-                        Discussion {comments.length > 0 && (
-                            <span className='comment-count'> {comments.length}</span>
-                        )}
+        <div className="card card-body mb-3">
+            <div className="row">
+                <div className="col-md-2">
+                    <Link to={`/profile/${user}`} >
+                        <img
+                            className="rounded-circle d-none d-md-block"
+                            src={avatar}
+                            alt="avatar"
+                        />
+                        <h5 className="text-center text-info">{name}</h5>
                     </Link>
-                    {!auth.loading && user === auth.user._id && (
-                        <button onClick={e => deletePost(_id)} type="button" className="btn btn-danger">
-                            <i className="fas fa-times"></i>
+                </div>
+
+                <div className="col-md-10">
+                    <p className="posttext">{text}</p>
+                    <p>
+                        <small>Posted on <Moment format="YYYY/MM/DD">{date}</Moment></small>
+                    </p>
+
+                    {showActions && <Fragment>
+                        <button onClick={e => addLike(_id)} type="button" className="btn btn-light mr-1">
+                            <i className="fas fa-thumbs-up"></i>
+                            {likes.length > 0 && (
+                                <span className="badge badge-light">{likes.length}</span>
+                            )}
                         </button>
-                    )}
-                </Fragment>}
+
+                        <button onClick={e => removeLike(_id)} type="button" className="btn btn-light mr-1">
+                            <i className="text-secondary fas fa-thumbs-down"></i>
+                        </button>
+
+                        <Link to={`/posts/${_id}`} className="btn btn-info mr-1">
+                            Discussion {comments.length > 0 && (
+                                <span className='badge badge-light'>{comments.length}</span>
+                            )}
+                        </Link>
+                        {!auth.loading && user === auth.user._id && (
+                            <button onClick={e => deletePost(_id)} type="button" className="btn btn-danger">
+                                <i className="fas fa-times"></i>
+                            </button>
+                        )}
+                    </Fragment>}
+                </div>
             </div>
         </div>
     )

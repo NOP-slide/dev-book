@@ -7,26 +7,31 @@ const PostForm = ({ addPost }) => {
     const [text, setText] = useState('');
 
     return (
-        <div className="post-form">
-            <div className="bg-primary p">
-                <h3>Say Something...</h3>
+        <div className="mb-3">
+            <div className="card card-info">
+                <div className="card-header bg-info text-white">Say Something...</div>
+                <div className="card-body">
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        addPost({ text });
+                        setText('');
+                    }}>
+                        <div className="form-group">
+                            <textarea
+                                className="form-control"
+                                name="text"
+                                cols="30"
+                                rows="5"
+                                placeholder="Create a post"
+                                value={text}
+                                onChange={e => setText(e.target.value)}
+                                required
+                            ></textarea>
+                        </div>
+                        <input type="submit" className="btn btn-dark my-1" value="Submit" />
+                    </form>
+                </div>
             </div>
-            <form className="form my-1" onSubmit={e => {
-                e.preventDefault();
-                addPost({text});
-                setText('');
-            }}>
-                <textarea
-                    name="text"
-                    cols="30"
-                    rows="5"
-                    placeholder="Create a post"
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                    required
-                ></textarea>
-                <input type="submit" className="btn btn-dark my-1" value="Submit" />
-            </form>
         </div>
     )
 }
