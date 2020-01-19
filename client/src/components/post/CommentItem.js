@@ -25,7 +25,7 @@ const CommentItem = ({ deleteComment, postid, comment: { _id, text, name, avatar
                         <small>Posted on <Moment format="YYYY/MM/DD">{date}</Moment></small>
                     </p>
                     {!auth.loading && user === auth.user._id && (
-                        <button onClick={e => deleteComment(postid, _id)} type="button" className="btn btn-danger mr-1">
+                        <button onClick={e => deleteComment(postid, _id)} type="button" className="btn btn-sm float-right btn-danger mt-1 mr-1">
                             <i className="fas fa-times"></i>
                         </button>
                     )}
